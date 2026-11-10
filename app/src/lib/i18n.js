@@ -14,22 +14,25 @@
 import { createContext, createElement, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import en from '../locales/en.json';
 import deCH from '../locales/de-CH.json';
+import it from '../locales/it.json';
 
 // Bundled packs, keyed by BCP-47 tag. en is the baseline and must be present.
 // Adding a language is dropping its JSON here plus one import line (KISS: no
 // dynamic discovery, mirroring the spec's "registration by presence" rule).
 const PACKS = {
+  it,
   en,
   'de-CH': deCH,
 };
 
-export const DEFAULT_LOCALE = 'en';
+export const DEFAULT_LOCALE = 'it';
 const STORAGE_KEY = 'pendpost-locale';
 
 // The selectable locales (KISS: registration by presence, mirroring PACKS). Labels
 // stay in their own language. Shared by Setup and the header language toggle so
 // there is a single source of truth (no per-component duplication).
 export const LOCALES = [
+  { tag: 'it', label: 'Italiano' },
   { tag: 'en', label: 'English' },
   { tag: 'de-CH', label: 'Deutsch (Schweiz)' },
 ];
@@ -147,9 +150,9 @@ const I18nContext = createContext({ locale: DEFAULT_LOCALE, t: makeT(DEFAULT_LOC
 // force a pack) or the resolved boot locale, holds it in STATE so the header toggle
 // can switch the UI live (no reload), and memoizes the bound t().
 export function I18nProvider({ locale, children }) {
-  const [active, setActive] = useState(() => matchPack(locale || resolveLocale()));
-  // A controlled `locale` prop stays authoritative (test ergonomics).
-  useEffect(() => { if (locale) setActive(matchPack(locale)); }, [locale]);
+  const [active, setActive] = useState(() => matchPack(hasStoredLocale() ? resolveLocale() : (locale || resolveLocale())));
+  // A controlled `locale` prop stays authoritative (test ergonomics), unless overridden by user storage.
+  useEffect(() => { if (locale && !hasStoredLocale()) setActive(matchPack(locale)); }, [locale]);
   // Live switch from the language toggle: persist the choice and re-render.
   const switchLocale = useCallback((tag) => { setLocale(tag); setActive(matchPack(tag)); }, []);
   // Session-only switch WITHOUT persisting: the server posting.locale adoption

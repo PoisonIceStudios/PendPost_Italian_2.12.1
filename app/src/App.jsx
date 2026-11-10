@@ -1188,11 +1188,14 @@ export default function App() {
                   <ConnectionStatus allClients={allClients} onNavigate={setPage} onShowAtRisk={showOverdue} onIssueAction={onCloudIssue} />
                   {/* Hidden on a phone: at 375px the icon row overran the header and clipped the
                       theme button. The language stays one tap away in Settings. */}
-                  <Tip label={locale === 'de-CH' ? t('app.lang.toEnglish') : t('app.lang.toGerman')}>
+                  <Tip label={locale === 'it' ? t('app.lang.toEnglish') : locale === 'en' ? t('app.lang.toGerman') : t('app.lang.toItalian')}>
                     <button
                       type="button"
-                      onClick={() => setLocale(locale === 'de-CH' ? 'en' : 'de-CH')}
-                      aria-label={locale === 'de-CH' ? t('app.lang.toEnglish') : t('app.lang.toGerman')}
+                      onClick={() => {
+                        const next = locale === 'it' ? 'en' : locale === 'en' ? 'de-CH' : 'it';
+                        setLocale(next);
+                      }}
+                      aria-label={locale === 'it' ? t('app.lang.toEnglish') : locale === 'en' ? t('app.lang.toGerman') : t('app.lang.toItalian')}
                       className={`${TAP_TARGET} hidden h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-zinc-200/60 transition hover:bg-zinc-300/60 dark:bg-zinc-800/60 dark:hover:bg-zinc-700/60 focus-visible:ring-2 focus-visible:ring-brand sm:flex`}
                     >
                       <Languages size={14} aria-hidden="true" />
