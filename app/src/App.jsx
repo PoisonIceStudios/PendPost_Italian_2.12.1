@@ -68,7 +68,7 @@ const PAGE_TITLE_KEYS = {
 };
 
 function useDarkMode() {
-  const [dark, setDark] = useState(() => localStorage.getItem('pendpost-theme') !== 'light');
+  const [dark, setDark] = useState(() => localStorage.getItem('pendpost-theme') === 'dark');
   const toggle = () => {
     setDark((prev) => {
       const next = !prev;

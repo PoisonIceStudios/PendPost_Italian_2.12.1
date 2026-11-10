@@ -19,7 +19,7 @@ function LocaleGate({ children }) {
 
 // The real first-paint theme bootstrap lives inline in index.html <head>
 // (UX-07); this line is only a dev-server safety mirror.
-document.documentElement.classList.toggle('dark', localStorage.getItem('pendpost-theme') !== 'light');
+document.documentElement.classList.toggle('dark', localStorage.getItem('pendpost-theme') === 'dark');
 // Gate the body color transition behind .theme-ready (added one frame after
 // first paint) so the bootstrap itself never animates the wrong theme.
 requestAnimationFrame(() => document.documentElement.classList.add('theme-ready'));

@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>pendpost</title>
     <script>
-      // Theme bootstrap BEFORE the stylesheet/bundle so light-mode users never
-      // see a dark first paint (UX-07). main.jsx keeps a harmless mirror.
-      document.documentElement.classList.toggle('dark', localStorage.getItem('pendpost-theme') !== 'light');
+      // Theme bootstrap: default to LIGHT mode
+      if (!localStorage.getItem('pendpost-theme') || localStorage.getItem('pendpost-theme') !== 'dark') {
+        localStorage.setItem('pendpost-theme', 'light');
+      }
+      document.documentElement.classList.toggle('dark', localStorage.getItem('pendpost-theme') === 'dark');
       if (!localStorage.getItem('pendpost-locale') || localStorage.getItem('pendpost-locale') === 'en') {
         localStorage.setItem('pendpost-locale', 'it');
       }
@@ -21,9 +23,9 @@
          / #0f766e (light), matching var(--accent). Honours reduced-motion. */
       #pp-boot {
         position: fixed; inset: 0; display: grid; place-items: center;
-        background: #0d0f12; color: #5eead4;
+        background: #ffffff; color: #0f766e;
       }
-      html:not(.dark) #pp-boot { background: #ffffff; color: #0f766e; }
+      html.dark #pp-boot { background: #0d0f12; color: #5eead4; }
       #pp-boot svg { animation: pp-boot-breathe 2.6s ease-in-out infinite; transform-origin: center; }
       #pp-boot .pp-boot-chevron { stroke-dasharray: 64; animation: pp-boot-clear 2.6s ease-in-out infinite; }
       @keyframes pp-boot-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.055); } }
