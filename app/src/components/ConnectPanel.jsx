@@ -49,6 +49,14 @@ export const CONNECT_FIELDS = {
   // NWC wallet URI later WITHOUT re-typing - and risking a mistype that rotates identity.
   nostr: { interactive: false, fields: [{ key: 'privateKey', labelKey: 'connect.nostrPrivateKey', secret: true, preserveIfBlank: true }, { key: 'relays', labelKey: 'connect.nostrRelays', preserveIfBlank: true }, { key: 'nwcUri', labelKey: 'connect.nostrNwc', secret: true, optional: true }] },
   gbp: { interactive: true, fields: [{ key: 'oauthClientId', labelKey: 'connect.clientId', placeholderKey: 'connect.clientId.gbp' }, { key: 'clientSecret', labelKey: 'connect.clientSecret', secret: true }] },
+  kofi: {
+    interactive: false,
+    fields: [
+      { key: 'pageUrl', labelKey: 'connect.kofiPageUrl', placeholderKey: 'connect.kofiPageUrl.placeholder' },
+      { key: 'verificationToken', labelKey: 'connect.kofiVerificationToken', placeholderKey: 'connect.kofiVerificationToken.placeholder', secret: true, optional: true },
+      { key: 'sessionCookie', labelKey: 'connect.kofiSessionCookie', placeholderKey: 'connect.kofiSessionCookie.placeholder', secret: true, optional: true },
+    ],
+  },
   // Bluesky is a Radar reply lane with no Setup card (it is not a publish target, lib/setup.mjs
   // PLATFORMS). Its connect runs in place from the post that needs it (IssueFixButton), with
   // the handle (or email) and an app password; keys match lib/api.mjs STATIC_LANES.bluesky.

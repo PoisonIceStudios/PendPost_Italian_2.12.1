@@ -3566,6 +3566,26 @@
     "tray.more": "{count} weitere",
     "tray.less": "Weniger anzeigen",
     "tray.cloud.affects": "Betrifft {names}",
-    "sidebar.nextPostNeedsYou": "Geht nicht raus, braucht dich"
+    "sidebar.nextPostNeedsYou": "Geht nicht raus, braucht dich",
+    "composer.field.kofiAudience": "Ko-fi-Zielgruppe",
+    "composer.field.kofiAudiencePublic": "Offentlich",
+    "composer.field.kofiAudienceSupporters": "Nur Unterstützer",
+    "composer.field.kofiAudienceMembers": "Nur Stufenmitglieder",
+    "composer.field.kofiAudienceHint": "Wählen Sie, ob der Beitrag öffentlich, für Unterstützer oder Stufenmitglieder sichtbar ist.",
+    "postDetail.field.kofiAudience": "Ko-fi-Zielgruppe",
+    "postDetail.field.kofiAudience.public": "Offentlich",
+    "postDetail.field.kofiAudience.supporters": "Nur Unterstützer",
+    "postDetail.field.kofiAudience.members": "Nur Stufenmitglieder",
+    "connect.kofiPageUrl": "Ersteller-Seiten-URL",
+    "connect.kofiPageUrl.placeholder": "https://ko-fi.com/ihrname",
+    "connect.kofiVerificationToken": "Verifizierungstoken (optional)",
+    "connect.kofiVerificationToken.placeholder": "Token aus Einstellungen > API & Webhooks",
+    "connect.kofiSessionCookie": "Sitzungscookie (optional)",
+    "connect.kofiSessionCookie.placeholder": "Sitzungscookie für direkte Veröffentlichung",
+    "setup.agent.kimi.token.label": "Kimi (Moonshot AI) API-Schlüssel",
+    "setup.agent.kimi.token.placeholder": "sk-... (Kimi API-Schlüssel einfügen)",
+    "setup.agent.kimi.step1": "Erstellen Sie einen API-Schlüssel auf der Moonshot AI-Plattform",
+    "setup.agent.kimi.portalHint": "Offnen Sie platform.moonshot.cn und erstellen Sie einen API-Schlüssel.",
+    "setup.agent.kimi.step2": "Fügen Sie Ihren Kimi API-Schlüssel unten ein, um Kimi als Recherche- und Entwurfsagent zu verbinden."
   }
 }

@@ -61,7 +61,7 @@ try {
   ok(Object.keys(iface.registeredLanes()).length === 0, 'absent registry: registeredLanes() is empty');
   ok(BUILTIN_LANES.every((l) => l in iface.allLanes()), 'absent registry: the built-in lanes are present');
   ok(!('acmesocial' in iface.allLanes()), 'absent registry: no phantom lane');
-  ok(iface.allPostPlatforms().sort().join(',') === 'discord,facebook,gbp,ghost,instagram,linkedin,mastodon,nostr,pinterest,reddit,telegram,tiktok,wordpress,x,youtube',
+  ok(iface.allPostPlatforms().sort().join(',') === 'discord,facebook,gbp,ghost,instagram,kofi,linkedin,mastodon,nostr,pinterest,reddit,telegram,tiktok,wordpress,x,youtube',
     'absent registry: post platforms are exactly the built-ins');
   // validateFieldValues uses the merged platform set; an unknown lane is rejected.
   ok(validateFieldValues({ platforms: ['acmesocial'] }) !== null && validateFieldValues({ platforms: ['acmesocial'] }).code === 'invalid_input',

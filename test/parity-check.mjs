@@ -32,7 +32,7 @@
 // N/A-by-design claims stay auditable next to the contract itself.
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -224,7 +224,7 @@ const READ_ONLY_TOOLS = new Set([
   // owner-driven WRITEs (they carry an optional clientId); dismiss-link is GUI/REST-only.
   'list_engagers',
 ]);
-const { TOOLS } = await import(path.join(ROOT, 'lib', 'mcp.mjs'));
+const { TOOLS } = await import(pathToFileURL(path.join(ROOT, 'lib', 'mcp.mjs')).href);
 for (const tool of TOOLS) {
   if (READ_ONLY_TOOLS.has(tool.name)) continue;
   const props = tool.inputSchema && tool.inputSchema.properties;

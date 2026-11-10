@@ -1324,6 +1324,7 @@ export default function Composer({ mode, post, campaigns, onClose, onSaved, seed
   const [publishAsDraft, setPublishAsDraft] = useState(isEdit ? post.publishAsDraft === true : false);
   // LinkedIn per-post author target: Company Page (default) or the member's personal profile.
   const [liAuthor, setLiAuthor] = useState(isEdit && post.liAuthor === 'member' ? 'member' : 'organization');
+  const [kofiAudience, setKofiAudience] = useState(isEdit ? post.kofiAudience || 'public' : 'public');
   const [canonicalUrl, setCanonicalUrl] = useState(isEdit ? post.canonicalUrl || '' : '');
   const [ghostEmail, setGhostEmail] = useState(isEdit ? post.ghostEmail === true : false);
   // Spec 01: Ghost newsletter refinements, nested under the ghostEmail opt-in -
@@ -1440,6 +1441,7 @@ export default function Composer({ mode, post, campaigns, onClose, onSaved, seed
     featureImageAlt: isEdit ? post.featureImageAlt || '' : '',
     publishAsDraft: isEdit ? post.publishAsDraft === true : false,
     liAuthor: isEdit && post.liAuthor === 'member' ? 'member' : 'organization',
+    kofiAudience: isEdit ? post.kofiAudience || 'public' : 'public',
     canonicalUrl: isEdit ? post.canonicalUrl || '' : '',
     ghostEmail: isEdit ? post.ghostEmail === true : false,
     newsletter: isEdit ? post.newsletter || '' : '',
@@ -1971,6 +1973,7 @@ export default function Composer({ mode, post, campaigns, onClose, onSaved, seed
           featureImageAlt: featureImageAlt || null,
           publishAsDraft: publishAsDraft === true ? true : null,
           liAuthor: liAuthor === 'member' ? 'member' : null,
+          kofiAudience: platforms.includes('kofi') ? kofiAudience : null,
           canonicalUrl: canonicalUrl || null,
           ghostEmail: ghostEmail === true ? true : null,
           newsletter: newsletter || null,
@@ -2035,6 +2038,7 @@ export default function Composer({ mode, post, campaigns, onClose, onSaved, seed
           featureImageAlt: featureImageAlt || undefined,
           publishAsDraft: publishAsDraft === true ? true : undefined,
           liAuthor: liAuthor === 'member' ? 'member' : undefined,
+          kofiAudience: platforms.includes('kofi') ? kofiAudience : undefined,
           canonicalUrl: canonicalUrl || undefined,
           ghostEmail: ghostEmail === true ? true : undefined,
           newsletter: newsletter || undefined,
@@ -2675,6 +2679,32 @@ export default function Composer({ mode, post, campaigns, onClose, onSaved, seed
                 ))}
               </div>
               <p className="text-[11px] text-zinc-500 dark:text-zinc-400">{t('composer.field.liAuthorHint')}</p>
+            </div>
+          ) : null}
+
+          {rel.kofiAudience ? (
+            <div className="space-y-1.5">
+              <span className={EYEBROW}>{t('composer.field.kofiAudience')}</span>
+              <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={t('composer.field.kofiAudience')}>
+                {[
+                  { v: 'public', label: t('composer.field.kofiAudiencePublic') },
+                  { v: 'supporters', label: t('composer.field.kofiAudienceSupporters') },
+                  { v: 'members', label: t('composer.field.kofiAudienceMembers') },
+                ].map((opt) => (
+                  <label key={opt.v} className={`flex cursor-pointer items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-xs font-bold ${INNER_SURFACE} ${kofiAudience === opt.v ? 'ring-1 ring-brand' : ''}`}>
+                    <input
+                      type="radio"
+                      name="composer-kofiaudience"
+                      value={opt.v}
+                      checked={kofiAudience === opt.v}
+                      onChange={() => setKofiAudience(opt.v)}
+                      className="h-3.5 w-3.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+                    />
+                    {opt.label}
+                  </label>
+                ))}
+              </div>
+              <p className="text-[11px] text-zinc-500 dark:text-zinc-400">{t('composer.field.kofiAudienceHint')}</p>
             </div>
           ) : null}
 

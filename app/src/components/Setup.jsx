@@ -614,6 +614,7 @@ function AgentTokenPanel({ provider, onStored }) {
   const [token, setToken] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
+  const isKimi = provider === 'kimi';
   const submit = async (e) => {
     e.preventDefault();
     setBusy(true);
@@ -634,7 +635,9 @@ function AgentTokenPanel({ provider, onStored }) {
   };
   return (
     <form onSubmit={submit} className="space-y-1.5">
-      <label htmlFor="agent-token" className="text-[11px] font-semibold text-zinc-600 dark:text-zinc-300">{t('setup.agent.token.label')}</label>
+      <label htmlFor="agent-token" className="text-[11px] font-semibold text-zinc-600 dark:text-zinc-300">
+        {isKimi ? t('setup.agent.kimi.token.label') : t('setup.agent.token.label')}
+      </label>
       <div className="flex items-center gap-2">
         <input
           id="agent-token"
@@ -643,7 +646,7 @@ function AgentTokenPanel({ provider, onStored }) {
           onChange={(e2) => setToken(e2.target.value)}
           autoComplete="off"
           spellCheck={false}
-          placeholder={t('setup.agent.token.placeholder')}
+          placeholder={isKimi ? t('setup.agent.kimi.token.placeholder') : t('setup.agent.token.placeholder')}
           disabled={busy}
           className={`${FIELD} flex-1`}
         />
@@ -813,9 +816,22 @@ function AgentDetail({ agent, onNavigate = () => {} }) {
                   they are without the list chrome stacking an essay in front of them. */}
               <div className="space-y-1.5">
                 {hasAdopt ? <p className={`${EYEBROW} pt-0.5`}>{t('setup.agent.orMint')}</p> : null}
-                <label htmlFor="agent-mint-cmd" className="text-[11px] font-semibold text-zinc-600 dark:text-zinc-300">{t('setup.agent.step1')}</label>
-                <pre id="agent-mint-cmd" className="overflow-x-auto rounded-lg bg-zinc-900/5 px-2 py-1.5 font-mono text-[11px] text-zinc-700 dark:bg-white/10 dark:text-zinc-200">{mintCmd}</pre>
-                <p className="text-[11px] leading-relaxed text-zinc-600 dark:text-zinc-400">{t('setup.agent.step2')}</p>
+                <label htmlFor="agent-mint-cmd" className="text-[11px] font-semibold text-zinc-600 dark:text-zinc-300">
+                  {chosen?.id === 'kimi' ? t('setup.agent.kimi.step1') : t('setup.agent.step1')}
+                </label>
+                {chosen?.id === 'kimi' ? (
+                  <div className="rounded-lg bg-zinc-900/5 p-2 text-xs text-zinc-700 dark:bg-white/10 dark:text-zinc-200">
+                    <a href="https://platform.moonshot.cn" target="_blank" rel="noopener noreferrer" className="font-semibold text-brand underline hover:opacity-80">
+                      https://platform.moonshot.cn
+                    </a>
+                    <span className="ml-2 text-[11px] text-zinc-500 dark:text-zinc-400">{t('setup.agent.kimi.portalHint')}</span>
+                  </div>
+                ) : (
+                  <pre id="agent-mint-cmd" className="overflow-x-auto rounded-lg bg-zinc-900/5 px-2 py-1.5 font-mono text-[11px] text-zinc-700 dark:bg-white/10 dark:text-zinc-200">{mintCmd}</pre>
+                )}
+                <p className="text-[11px] leading-relaxed text-zinc-600 dark:text-zinc-400">
+                  {chosen?.id === 'kimi' ? t('setup.agent.kimi.step2') : t('setup.agent.step2')}
+                </p>
                 <AgentTokenPanel provider={chosen?.id} onStored={refresh} />
               </div>
             </>

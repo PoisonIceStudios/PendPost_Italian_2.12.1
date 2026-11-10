@@ -130,6 +130,14 @@ function GbpLogo({ size = 16, className = '', ...props }) {
     </svg>
   );
 }
+function KofiLogo({ size = 16, className = '', ...props }) {
+  const labelled = props['aria-label'];
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className} role={labelled ? 'img' : undefined} aria-hidden={labelled ? undefined : true} {...props}>
+      <path d="M23.881 8.948c-.773-4.085-4.852-4.593-4.852-4.593H.724c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.683-2.566 3.823.167 6.62-2.074 6.62-6.084 0-.001-.01-1.002-.02-1.998zm-4.708 4.708c0 .878-.459 1.487-1.378 1.815v-5.265c.92.327 1.378.937 1.378 1.815v1.635zM14.654 13.91s-.072 1.077-1.127 1.258c-1.055.18-8.736.023-8.736.023s-1.109-.136-1.182-1.281c-.073-1.146-.022-7.859-.022-7.859h11.067s.072 6.713 0 7.859zm-2.072-4.223a1.442 1.442 0 0 0-2.04 0l-.366.366-.366-.366a1.442 1.442 0 0 0-2.04 2.04l2.406 2.406 2.406-2.406a1.442 1.442 0 0 0 0-2.04z" />
+    </svg>
+  );
+}
 // Radar (beta) SEARCH-source marks (spec 33). Bluesky butterfly + the Hacker News
 // "Y" square. These two are LISTENING sources, never publish targets - they only ever
 // render as a Radar source badge (the Composer/Setup never show them).
@@ -166,6 +174,7 @@ export const PLATFORM_META = {
   ghost: { Icon: GhostLogo, color: 'text-zinc-900 dark:text-zinc-100', label: 'Ghost' },
   nostr: { Icon: NostrLogo, color: 'text-[#8E30EB]', label: 'Nostr' },
   gbp: { Icon: GbpLogo, color: 'text-[#4285F4]', label: 'Google Business Profile' },
+  kofi: { Icon: KofiLogo, color: 'text-[#FF5E5B]', label: 'Ko-fi' },
   // Radar (beta) SEARCH sources (spec 33) - listening only, never publish targets.
   bluesky: { Icon: BlueskyLogo, color: 'text-[#0085FF]', label: 'Bluesky' },
   hackernews: { Icon: HackerNewsLogo, color: 'text-[#FF6600]', label: 'Hacker News' },

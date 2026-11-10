@@ -13,6 +13,12 @@ echo.
 echo Premi CTRL+C in questa finestra se vuoi fermare il server.
 echo.
 
+rem Verifica che il frontend sia compilato
+if not exist "app\dist" (
+    echo Compilazione interfaccia frontend in corso...
+    call npm --prefix app run build
+)
+
 rem Apri il browser dopo 2 secondi
 start "" powershell -NoProfile -Command "Start-Sleep -Seconds 2; if (Get-Command msedge -ErrorAction SilentlyContinue) { Start-Process msedge '--app=http://127.0.0.1:8090' } else { Start-Process 'http://127.0.0.1:8090' }"
 

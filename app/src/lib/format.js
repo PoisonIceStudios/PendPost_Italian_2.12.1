@@ -741,7 +741,7 @@ export function rowTypeLabel(t, type) {
 // other lane (Instagram, Facebook, TikTok, X, Mastodon, ...) publishes one continuous caption,
 // so turning its first sentence into a bold "title" splits one text into two voices. The
 // LinkedIn link-card title is the card's own and stays inside the LinkedIn card.
-export const TITLED_LANES = new Set(['youtube', 'reddit', 'pinterest', 'wordpress', 'ghost']);
+export const TITLED_LANES = new Set(['youtube', 'reddit', 'pinterest', 'wordpress', 'ghost', 'kofi']);
 
 // The VISIBLE title of a post row: post.title, only when it is set (and not a machine
 // timestamp, the same guard as postDisplayTitle) AND at least one of the post's lanes
@@ -1127,6 +1127,11 @@ export function handOffTarget(post, platform, accounts) {
       ? { platform, url, label, truncated: false }
       : { platform, url: `${instance}/share`, label, truncated: true };
   }
+  if (platform === 'kofi') {
+    const page = String(accounts?.kofi?.pageUrl || 'https://ko-fi.com').replace(/\/+$/, '').trim();
+    const url = `${page}/manage/posts`;
+    return { platform, url, label: 'Ko-fi', truncated: false };
+  }
   return { platform, url: null };
 }
 
@@ -1398,7 +1403,7 @@ export function postNeedsMedia(post) {
   return !['text', 'poll', 'nostr-longform'].includes(post?.type);
 }
 
-export const PLATFORMS = ['facebook', 'instagram', 'linkedin', 'youtube', 'x', 'telegram', 'discord', 'reddit', 'pinterest', 'tiktok', 'mastodon', 'wordpress', 'ghost', 'nostr', 'gbp'];
+export const PLATFORMS = ['facebook', 'instagram', 'linkedin', 'youtube', 'x', 'telegram', 'discord', 'reddit', 'pinterest', 'tiktok', 'mastodon', 'wordpress', 'ghost', 'nostr', 'gbp', 'kofi'];
 
 // The X developer portal where the operator tops up API credits (the account-level
 // fix for an HTTP 402 credits-depleted lane halt). Single-sourced in the setup
@@ -1503,6 +1508,7 @@ const PLATFORM_FORMATS = {
   // fallback) - so ONLY nostr offers 'nostr-longform', alongside the poll it already had.
   nostr: [...POLL_LANE_FORMATS, 'nostr-longform'],
   gbp: TEXT_LANE_FORMATS,
+  kofi: [...TEXT_LANE_FORMATS, 'image'],
 };
 export function formatsForPlatform(platformId) {
   return PLATFORM_FORMATS[platformId] || BASE_FALLBACK_FORMATS;
@@ -1636,7 +1642,7 @@ export function typeOptionLabel(t, platforms, type) {
 //   - linkedin text/article: title + liDescription + link + image.
 //   - instagram: firstComment (feed) OR interactiveStory + hashtags (story).
 //   - gbp: the local-post intent object.
-const CAPTION_PLATFORMS = ['facebook', 'instagram', 'linkedin', 'x', 'telegram', 'discord', 'reddit', 'pinterest', 'tiktok', 'mastodon', 'nostr', 'gbp'];
+const CAPTION_PLATFORMS = ['facebook', 'instagram', 'linkedin', 'x', 'telegram', 'discord', 'reddit', 'pinterest', 'tiktok', 'mastodon', 'nostr', 'gbp', 'kofi'];
 
 // Which targeted platforms consume `field`, in PLATFORMS order (for the label
 // icons that show an operator exactly which networks a field feeds).
@@ -1669,7 +1675,8 @@ const FIELD_PLATFORMS = {
   hashtags: ['instagram', 'nostr'],
   // Spec 18: a Nostr long-form article also reads title/body/excerpt/image (the
   // shared blog long-form fields), so those badge the nostr lane too.
-  title: ['youtube', 'linkedin', 'wordpress', 'ghost', 'nostr'],
+  title: ['youtube', 'linkedin', 'wordpress', 'ghost', 'nostr', 'kofi'],
+  kofiAudience: ['kofi'],
   description: ['youtube'],
   tags: ['youtube', 'wordpress', 'ghost'],
   blogSlug: ['youtube'],
@@ -1804,7 +1811,8 @@ export function fieldRelevance(platforms = [], type = 'reel') {
     interactiveStory: has('instagram') && type === 'story',
     // Spec 18: a Nostr article's hashtags map to NIP-23 `t` topic tags.
     hashtags: (has('instagram') && type === 'story') || nostrLong,
-    title: has('youtube') || has('linkedin') || anyBlog || nostrLong,
+    title: has('youtube') || has('linkedin') || anyBlog || nostrLong || has('kofi'),
+    kofiAudience: has('kofi'),
     description: has('youtube'),
     tags: has('youtube') || anyBlog,
     blogSlug: has('youtube'),
@@ -1943,7 +1951,7 @@ const EDITABLE_FIELDS = [
 // Issue #39: youtubeCategoryId + containsSyntheticMedia are set through MCP/API only (no
 // Composer control, owner decision 2026-10-28) and ride here as read-only rows, shown
 // only when set, so the reviewer sees them before approving.
-const EXTRA_FIELDS = ['link', 'image', 'imageUrl', 'redditUrl', 'redditFlairId', 'redditSubreddit', 'isPromo', 'pinBoardSection', 'canonicalUrl', 'blogSlug', 'ghostEmail', 'newsletter', 'emailSegment', 'emailOnly', 'hashtags', 'gbp', 'interactiveStory', 'publishAsDraft', 'youtubeCategoryId', 'containsSyntheticMedia', 'liAuthor', 'tgCta', 'dcEmbed', 'ttInteraction', 'xReplySettings', 'poll'];
+const EXTRA_FIELDS = ['link', 'image', 'imageUrl', 'redditUrl', 'redditFlairId', 'redditSubreddit', 'isPromo', 'pinBoardSection', 'canonicalUrl', 'blogSlug', 'ghostEmail', 'newsletter', 'emailSegment', 'emailOnly', 'hashtags', 'gbp', 'interactiveStory', 'publishAsDraft', 'youtubeCategoryId', 'containsSyntheticMedia', 'liAuthor', 'tgCta', 'dcEmbed', 'ttInteraction', 'xReplySettings', 'poll', 'kofiAudience'];
 
 // The platforms (in PLATFORMS order) that `field` feeds on THIS post — its
 // declared platform set intersected with the post's targets. Exported as the ONE rule a

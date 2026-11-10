@@ -5,7 +5,7 @@
 pendpost is a local-first, MCP-native social planner with a human approval gate.
 An agent drafts, schedules, and (once trusted) publishes across Instagram,
 Facebook, LinkedIn, X, YouTube, Telegram, Discord, Reddit, Pinterest, TikTok,
-Mastodon, WordPress, Ghost, Nostr, and Google Business Profile; a human approves
+Mastodon, WordPress, Ghost, Nostr, Google Business Profile, and Ko-fi; a human approves
 before anything goes out. Reddit, Pinterest, TikTok, and Google Business Profile
 are beta lanes (each gated by a vendor trial/audit/access step, called out in its
 playbook below).
@@ -416,6 +416,27 @@ same data arrives live (with per-lane status) via `pendpost_health`'s
 - _Every API call returns 403 after a successful consent._ The Cloud project has not been approved for the Business Profile APIs yet. **Fix:** Submit the access request form and wait for approval; the OAuth token itself is fine.
 - _Publish fails with a location error._ GBP_ACCOUNT_ID/GBP_LOCATION_ID are missing, or the location is not verified/owned by the authorized account. **Fix:** Run auth to list candidates, verify the location in the Business Profile manager, and set both ids.
 - _The post is created but never becomes visible._ Google reviews local posts; REJECTED state means a content-policy hit. **Fix:** Check verify for the post state and adjust the content (no phone numbers in the summary, policy-safe imagery).
+
+## Ko-fi
+
+- **Portal:** https://ko-fi.com/manage
+- **App to create:** a Ko-fi creator page
+- **Products to add:** Posts & Gallery, Memberships & Tiers, API / Webhooks
+- **Scopes to request:** ``
+
+**Steps**
+
+1. **Set your Ko-fi Page URL** - Set your Ko-fi creator page URL (e.g. https://ko-fi.com/yourname or your username). pendpost routes your updates, posts, and tier-exclusive content to this page. _(sets env `KOFI_PAGE_URL`; sets identifier `kofiPageUrl`)_
+2. **Optional Verification Token or Session Cookie** - Under Ko-fi Settings > API / Webhooks, you can find your Verification Token for webhook signals. For direct automated publishing without browser handoff, set KOFI_SESSION_COOKIE; otherwise 1-click assisted prefill publishing is used. _(sets env `KOFI_VERIFICATION_TOKEN`)_
+3. **Confirm the connection** - Run the CLI below to verify the page resolves and confirm the lane.
+   ```bash
+   node scripts/kofi-social.mjs auth
+   ```
+
+**Common failures**
+
+- _KOFI_PAGE_URL is missing or page unreachable._ The creator page URL was not provided or has a typo. **Fix:** Confirm your Ko-fi URL matches https://ko-fi.com/<yourname> and update KOFI_PAGE_URL.
+- _Publishing requires manual confirmation._ Ko-fi lacks an open public REST API for content creation without browser session cookies. **Fix:** Use the 1-click assisted publish handoff to https://ko-fi.com/manage/posts or provide a KOFI_SESSION_COOKIE in .env.
 
 ## Radar (beta) sources
 

@@ -282,6 +282,7 @@ function PostExtras({ post, extras, t }) {
     // LinkedIn author target: show a review row only for the non-default 'member' (personal
     // profile). An organization/unset post shows no row - byte-identical to before.
     else if (key === 'liAuthor' && post.liAuthor === 'member') rows.push({ key, label: t('postDetail.field.liAuthor'), value: t('postDetail.field.liAuthorMember') });
+    else if (key === 'kofiAudience' && post.kofiAudience) rows.push({ key, label: t('postDetail.field.kofiAudience'), value: t(`postDetail.field.kofiAudience.${post.kofiAudience}`) });
     else if (key === 'tgCta' && post.tgCta) rows.push({ key, label: t('postDetail.field.tgCta'), value: tgCtaSummary(post.tgCta, t) });
     else if (key === 'dcEmbed' && post.dcEmbed) rows.push({ key, label: t('postDetail.field.dcEmbed'), value: dcEmbedSummary(post.dcEmbed) });
     else if (key === 'ttInteraction' && post.ttInteraction) rows.push({ key, label: t('postDetail.field.ttInteraction'), value: ttInteractionSummary(post.ttInteraction, t) });

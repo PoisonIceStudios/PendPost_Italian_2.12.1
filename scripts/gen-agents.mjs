@@ -15,7 +15,7 @@ import { PLAYBOOKS, RADAR_SOURCE_PLAYBOOKS } from '../lib/playbooks.mjs';
 // labels are local doc presentation (headings), not business logic.
 const ORDER = [
   'meta', 'linkedin', 'x', 'youtube', 'telegram', 'discord', 'reddit',
-  'pinterest', 'tiktok', 'mastodon', 'wordpress', 'ghost', 'nostr', 'gbp',
+  'pinterest', 'tiktok', 'mastodon', 'wordpress', 'ghost', 'nostr', 'gbp', 'kofi',
 ];
 // Radar (beta) SEARCH sources (spec 33): listening sources, NOT publish/setup lanes, so
 // they come from RADAR_SOURCE_PLAYBOOKS (separate from the key-parity-locked PLAYBOOKS)
@@ -39,6 +39,7 @@ const DISPLAY = {
   ghost: 'Ghost',
   nostr: 'Nostr',
   gbp: 'Google Business Profile (beta)',
+  kofi: 'Ko-fi',
 };
 
 const HEADER =
@@ -51,7 +52,7 @@ const PREAMBLE = `# AGENTS.md
 pendpost is a local-first, MCP-native social planner with a human approval gate.
 An agent drafts, schedules, and (once trusted) publishes across Instagram,
 Facebook, LinkedIn, X, YouTube, Telegram, Discord, Reddit, Pinterest, TikTok,
-Mastodon, WordPress, Ghost, Nostr, and Google Business Profile; a human approves
+Mastodon, WordPress, Ghost, Nostr, Google Business Profile, and Ko-fi; a human approves
 before anything goes out. Reddit, Pinterest, TikTok, and Google Business Profile
 are beta lanes (each gated by a vendor trial/audit/access step, called out in its
 playbook below).

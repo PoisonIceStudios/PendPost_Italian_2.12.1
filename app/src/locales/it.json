@@ -3566,6 +3566,26 @@
     "tray.more": "Altri {count}",
     "tray.less": "Mostra meno",
     "tray.cloud.affects": "Interessa {names}",
-    "sidebar.nextPostNeedsYou": "Will not go out, needs you"
+    "sidebar.nextPostNeedsYou": "Will not go out, needs you",
+    "composer.field.kofiAudience": "Destinatari Ko-fi",
+    "composer.field.kofiAudiencePublic": "Pubblico",
+    "composer.field.kofiAudienceSupporters": "Solo sostenitori",
+    "composer.field.kofiAudienceMembers": "Membri dei livelli",
+    "composer.field.kofiAudienceHint": "Scegli se questo post e visibile a tutti, solo a chi ha donato un caffe o agli abbonati ai livelli.",
+    "postDetail.field.kofiAudience": "Destinatari Ko-fi",
+    "postDetail.field.kofiAudience.public": "Pubblico",
+    "postDetail.field.kofiAudience.supporters": "Solo sostenitori",
+    "postDetail.field.kofiAudience.members": "Membri dei livelli",
+    "connect.kofiPageUrl": "URL pagina creatore",
+    "connect.kofiPageUrl.placeholder": "https://ko-fi.com/tuonome",
+    "connect.kofiVerificationToken": "Token di verifica (opzionale)",
+    "connect.kofiVerificationToken.placeholder": "Token da Impostazioni > API & Webhook",
+    "connect.kofiSessionCookie": "Cookie di sessione (opzionale)",
+    "connect.kofiSessionCookie.placeholder": "Cookie di sessione per pubblicazione diretta",
+    "setup.agent.kimi.token.label": "API Key Kimi (Moonshot AI)",
+    "setup.agent.kimi.token.placeholder": "sk-... (Incolla la tua Kimi API Key)",
+    "setup.agent.kimi.step1": "Crea una API Key sulla piattaforma Moonshot AI",
+    "setup.agent.kimi.portalHint": "Accedi a platform.moonshot.cn e genera una nuova chiave API.",
+    "setup.agent.kimi.step2": "Incolla qui sotto la tua API Key di Kimi per abilitare la ricerca Radar e la stesura assistita dei post."
   }
 }

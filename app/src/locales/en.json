@@ -3566,6 +3566,26 @@
     "tray.more": "{count} more",
     "tray.less": "Show less",
     "tray.cloud.affects": "Affects {names}",
-    "sidebar.nextPostNeedsYou": "Will not go out, needs you"
+    "sidebar.nextPostNeedsYou": "Will not go out, needs you",
+    "composer.field.kofiAudience": "Ko-fi Audience",
+    "composer.field.kofiAudiencePublic": "Public",
+    "composer.field.kofiAudienceSupporters": "Supporters only",
+    "composer.field.kofiAudienceMembers": "Tier members only",
+    "composer.field.kofiAudienceHint": "Choose whether this post is visible to everyone, one-off supporters, or monthly tier members.",
+    "postDetail.field.kofiAudience": "Ko-fi audience",
+    "postDetail.field.kofiAudience.public": "Public",
+    "postDetail.field.kofiAudience.supporters": "Supporters only",
+    "postDetail.field.kofiAudience.members": "Tier members only",
+    "connect.kofiPageUrl": "Creator page URL",
+    "connect.kofiPageUrl.placeholder": "https://ko-fi.com/yourname",
+    "connect.kofiVerificationToken": "Verification token (optional)",
+    "connect.kofiVerificationToken.placeholder": "Token from Settings > API & Webhooks",
+    "connect.kofiSessionCookie": "Session cookie (optional)",
+    "connect.kofiSessionCookie.placeholder": "Session cookie for direct automated publishing",
+    "setup.agent.kimi.token.label": "Kimi (Moonshot AI) API Key",
+    "setup.agent.kimi.token.placeholder": "sk-... (Paste your Kimi API Key)",
+    "setup.agent.kimi.step1": "Create an API Key on Moonshot AI platform",
+    "setup.agent.kimi.portalHint": "Open platform.moonshot.cn, log in and generate an API key.",
+    "setup.agent.kimi.step2": "Paste your Kimi API key below to connect Kimi as your autonomous research and drafting agent."
   }
 }
